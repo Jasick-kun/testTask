@@ -8,12 +8,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
+@RestController
 @RequiredArgsConstructor
 @RequestMapping("/articles")
 public class ArticleController {
@@ -29,14 +28,14 @@ public class ArticleController {
 
     @GetMapping(value = "/criteria",consumes = {MediaType.APPLICATION_JSON_VALUE })
     public List<Article> getArticles(@RequestBody List<SearchCriteria> searchCriteria,
-                                     @RequestParam(name = "sortValue",required = false,defaultValue = "id") String sortValue,
+                                     @RequestParam(name = "sortBy",required = false,defaultValue = "id") String sortBy,
                                      @RequestParam(name = "sortType",required = false,defaultValue = "ASC") String sortType) {
         Sort sort;
         if(sortType.equals("ASC")){
-            sort = Sort.by(sortValue).ascending();
+            sort = Sort.by(sortBy).ascending();
         }
         else{
-            sort = Sort.by(sortValue).descending();
+            sort = Sort.by(sortBy).descending();
         }
 
         return  articleService.getAllWithCriteria(searchCriteria,sort);

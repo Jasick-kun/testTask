@@ -6,6 +6,7 @@ import kz.jasulan.testtask.service.ProductService;
 import kz.jasulan.testtask.specification.CreateSpecification;
 import kz.jasulan.testtask.specification.SearchCriteria;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -26,12 +27,12 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<Product> getAllWithCriteria(List<SearchCriteria> searchCriteria) {
+    public List<Product> getAllWithCriteria(List<SearchCriteria> searchCriteria, Sort sort) {
 
         CreateSpecification<Product> createSpecification = new CreateSpecification<Product>();
         for (SearchCriteria criteria : searchCriteria) {
             createSpecification.add(criteria);
         }
-        return productRepository.findAll(createSpecification);
+        return productRepository.findAll(createSpecification,sort);
     }
 }
