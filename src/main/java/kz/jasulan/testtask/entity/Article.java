@@ -27,5 +27,5 @@ public class Article {
 
     private String content;
 
-    private Date date;
+    private Date createdDate;
 }

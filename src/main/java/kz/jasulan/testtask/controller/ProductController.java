@@ -19,6 +19,11 @@ public class ProductController {
     private final ProductServiceImpl productService;
     private final ProductRepository productRepository;
 
+    @GetMapping("/all")
+    public List<Product> getAllProducts(){
+        return productService.getAll();
+    }
+
     @GetMapping(value = "/criteria",consumes = {MediaType.APPLICATION_JSON_VALUE })
     public List<Product> getProducts(@RequestBody List<SearchCriteria> searchCriteria) {
 

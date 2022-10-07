@@ -8,11 +8,11 @@ import javax.persistence.criteria.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProductSpecification implements Specification<Product> {
+public class CreateSpecification<T> implements Specification<T> {
 
     private List<SearchCriteria> list;
 
-    public ProductSpecification(){
+    public CreateSpecification(){
         this.list= new ArrayList<>();
     }
 
@@ -21,7 +21,7 @@ public class ProductSpecification implements Specification<Product> {
     }
 
     @Override
-    public Predicate toPredicate(Root<Product> root, CriteriaQuery<?> query, CriteriaBuilder builder){
+    public Predicate toPredicate(Root<T> root, CriteriaQuery<?> query, CriteriaBuilder builder){
         List<Predicate> predicates = new ArrayList<>();
 
         for (SearchCriteria criteria : list) {
